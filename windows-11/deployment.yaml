@@ -36,9 +36,9 @@ spec:
             - name: DISK_SIZE
               value: "64G"
             - name: USERNAME
-              value: "bjgiuffre"
+              value: "some-person" # CHANGE THIS!
             - name: PASSWORD
-              value: "Bigdogsawyer!3"
+              value: "super-secret-password" # CHANGE THIS
           volumeMounts:
             - mountPath: /storage
               name: storage
