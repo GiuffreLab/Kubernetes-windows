@@ -74,6 +74,14 @@ The default username and password for the Windows container are defined as envir
    kubectl apply -k .
    ```
 
+## Tearing down the deployment
+
+To tear down the deployment simply go to the folder with the appropriate `kustomization.yaml` file and run the delete command
+
+```sh
+kubectl delete -k .
+```
+
 ## Kubernetes Resources
 
 The Kubernetes resources used in this project include:
