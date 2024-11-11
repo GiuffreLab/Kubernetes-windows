@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: windows-2025
+  namespace: windows-2025
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: windows-2025
+  template:
+    metadata:
+      labels:
+        app: windows-2025
+    spec:
+      terminationGracePeriodSeconds: 120
+      containers:
+        - name: windows-2025
+          image: dockurr/windows
+          ports:
+            - containerPort: 8006
+              protocol: TCP
+            - containerPort: 3389
+              protocol: TCP
+            - containerPort: 3389
+              protocol: UDP
+          securityContext:
+            privileged: true
+          env:
+            - name: VERSION
+              value: "2025"
+            - name: RAM_SIZE
+              value: "4G"
+            - name: CPU_CORES
+              value: "2"
+            - name: DISK_SIZE
+              value: "64G"
+            - name: USERNAME
+              value: "some-user" # CHANGE THIS
+            - name: PASSWORD
+              value: "super-secret-password" # CHANGE THIS
+          volumeMounts:
+            - mountPath: /storage
+              name: storage
+            - mountPath: /dev/kvm
+              name: dev-kvm
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: windows-pvc
+        - name: dev-kvm
+          hostPath:
+            path: /dev/kvm
